@@ -8,12 +8,12 @@ Follow the <a href="https://www.nextflow.io/docs/latest/getstarted.html" target=
 
 ###  IMPORT THE WORKFLOW 
 ```{bash}
- nextflow pull TapanBaral/scRNA-Seq_analysis_nexflow -r master
+ nextflow pull TapanBaral/Nextflow_scRNA_seq -r master
 ```
 
 
 ## PARAMETERS AND INPUTS
-Commands:  nextflow run TapanBaral/scRNA-Seq_analysis_nexflow [--help]
+Commands:  nextflow run TapanBaral/Nextflow_scRNA_seq [--help]
   #### Sample Information File:                        
      --inputfiles                      A TAB delimited without header file, first column sample name, second column full path to the    read1 and 3rd column full path to the read2
   #### QC checks:
@@ -52,16 +52,16 @@ Commands:  nextflow run TapanBaral/scRNA-Seq_analysis_nexflow [--help]
 ## RUN SALMON  ALIGNER
 
 ```{bash}
- nextflow  run TapanBaral/scRNASEQ_Nextflow --inputfiles $baseDir/sapmleInfo.txt --transcript_fasta $baseDir/ref/human/ensembl/Homo_sapiens.GRCh38.cdna.all.fa --gtf $baseDir/ref/human/ensembl/Homo_sapiens.GRCh38.109_chr1.gtf --aligner 'salmon'  --outdir OutPut_SALMON -profile docker --txp2gene $baseDir/txp2gene1.tsv   --skip_fastp true --skip_umi_extract true   --skip_post_fastqc true
+ nextflow  run TapanBaral/Nextflow_scRNA_seq --inputfiles $baseDir/sapmleInfo.txt --transcript_fasta $baseDir/ref/human/ensembl/Homo_sapiens.GRCh38.cdna.all.fa --gtf $baseDir/ref/human/ensembl/Homo_sapiens.GRCh38.109_chr1.gtf --aligner 'salmon'  --outdir OutPut_SALMON -profile docker --txp2gene $baseDir/txp2gene1.tsv   --skip_fastp true --skip_umi_extract true   --skip_post_fastqc true
 ```
 
 
 ## RUN STAR  ALIGNER, DROPLET 
 ```{bash}
- nextflow  run TapanBaral/scRNASEQ_Nextflow --inputfiles $baseDir/sapmleInfo.txt --genome_fasta $baseDir/ref/human/ensembl/Homo_sapiens.GRCh38.dna.chromosome.1.fa --gtf $baseDir/ref/human/ensembl/Homo_sapiens.GRCh38.109_chr1.gtf --aligner 'star'  --outdir OutPut_STAR -profile docker --txp2gene $baseDir/txp2gene1.tsv   --skip_fastp true --skip_umi_extract true --protocol 'droplet' --whitelist $baseDir/10x_V3_barcode_whitelist.txt.gz -resume --skip_post_fastqc true
+ nextflow  run TapanBaral/Nextflow_scRNA_seq --inputfiles $baseDir/sapmleInfo.txt --genome_fasta $baseDir/ref/human/ensembl/Homo_sapiens.GRCh38.dna.chromosome.1.fa --gtf $baseDir/ref/human/ensembl/Homo_sapiens.GRCh38.109_chr1.gtf --aligner 'star'  --outdir OutPut_STAR -profile docker --txp2gene $baseDir/txp2gene1.tsv   --skip_fastp true --skip_umi_extract true --protocol 'droplet' --whitelist $baseDir/10x_V3_barcode_whitelist.txt.gz -resume --skip_post_fastqc true
 ```
 
 ## RUN STAR  ALIGNER, PLATE
 ```{bash}
- nextflow  run TapanBaral/scRNASEQ_Nextflow --inputfiles $baseDir/sapmleInfo.txt --genome_fasta $baseDir/ref/human/ensembl/Homo_sapiens.GRCh38.dna.chromosome.1.fa --gtf $baseDir/ref/human/ensembl/Homo_sapiens.GRCh38.109_chr1.gtf --aligner 'star'  --outdir OutPut_STAR -profile docker --txp2gene $baseDir/txp2gene1.tsv   --skip_fastp true --skip_umi_extract true --protocol 'plate' --manifest $baseDir/manifest.tsv -resume --skip_post_fastqc true
+ nextflow  run TapanBaral/Nextflow_scRNA_seq --inputfiles $baseDir/sapmleInfo.txt --genome_fasta $baseDir/ref/human/ensembl/Homo_sapiens.GRCh38.dna.chromosome.1.fa --gtf $baseDir/ref/human/ensembl/Homo_sapiens.GRCh38.109_chr1.gtf --aligner 'star'  --outdir OutPut_STAR -profile docker --txp2gene $baseDir/txp2gene1.tsv   --skip_fastp true --skip_umi_extract true --protocol 'plate' --manifest $baseDir/manifest.tsv -resume --skip_post_fastqc true
 ```
