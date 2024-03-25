@@ -1,5 +1,7 @@
-# A NEXTFLOW WORKFLOW FOR SINGLE CELL RNA-SEQ DATA ANALYSIS
-#===============================#
+# WORKFLOW FOR SINGLE CELL RNA-SEQ DATA ANALYSIS
+
+This is a nextflow pipeline for  single cell RNA-seq data analysis. It takes paired end fastq.zg files generated from 10X or smartseq2 platform. STAR or salmon alignment tool can be used to read quantification. The output of the pipeline is a seuratObject rds file, which can be further used for downstream analysis.
+
 
 ## SET UP NEXTFLOW
 
@@ -15,7 +17,7 @@ Follow the <a href="https://www.nextflow.io/docs/latest/getstarted.html" target=
 ## PARAMETERS AND INPUTS
 Commands:  nextflow run TapanBaral/Nextflow_scRNA_seq [--help]
   #### Sample Information File:                        
-     --inputfiles                      A TAB delimited without header file, first column sample name, second column full path to the    read1 and 3rd column full path to the read2
+     --inputfiles                      A TAB delimited without header file, first column sample name, second column full path to the    read1  and 3rd column full path to the read2
   #### QC checks:
      --skip_pre_fastqc                  Skip pre-fastqc                                     [default: false]
      --skip_post_fastqc                 Skip post-fastqc                                    [default: false]

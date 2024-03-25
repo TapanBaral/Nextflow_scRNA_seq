@@ -9,6 +9,7 @@ include { FASTP_CHECK       } from '../subworkflows/02_01_fastp.nf'
 include { POSTQC_CHECK      } from  '../subworkflows/03_01_post_fastqc.nf'
 include { SCRNASEQ_ALEVIN   } from '../subworkflows/04_00_salmon.nf'
 include { SCRNASEQ_STAR     } from '../subworkflows/05_00_star.nf'
+include { MTX_CONVERSION    } from '../subworkflows/06_matrix_to_rds.nf'
 
 
 // INPUT FASTQ FILES , PASS IT INTO THE CHANNEL
@@ -37,6 +38,11 @@ def salmon_index_ch            = params.salmon_index ? file(params.salmon_index)
 def star_index_ch              = params.star_index ? file(params.star_index) : []
 ch_versions     = Channel.empty()
 workflow scRNAseq {
+
+        //Define the channels to collect outputs  and metadata
+        ch_versions     = Channel.empty()
+        ch_mtx_matrices = Channel.empty()
+
         if (!params.skip_pre_fastqc) {
         FASTQC_CHECK ( raw_reads_ch )
         ch_versions       = ch_versions.mix(FASTQC_CHECK.out.fastqc_version)
@@ -76,6 +82,7 @@ workflow scRNAseq {
 			trimmed_read_ch,
 			txp2gene_ch
 		)
+        ch_mtx_matrices = ch_mtx_matrices.mix(SCRNASEQ_ALEVIN.out.alevin_results)
         }else{
             SCRNASEQ_STAR(
                 star_index_ch,
@@ -86,7 +93,12 @@ workflow scRNAseq {
                 manifest_ch
 
             )
+            ch_mtx_matrices = ch_mtx_matrices.mix(SCRNASEQ_STAR.out.star_counts)
         }
+
+        MTX_CONVERSION(
+            ch_mtx_matrices
+        )
         
 }
 

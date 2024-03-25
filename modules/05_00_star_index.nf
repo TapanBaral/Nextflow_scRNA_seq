@@ -18,7 +18,7 @@ container 'biocontainers/mulled-v2-1fa26d1ce03c295fe2fdcf85831a92fbcbd7e8c2:ded3
     script:
     def args        = task.ext.args ?: ''
     def args_list   = args.tokenize()
-    def memory      = task.memory ? "--limitGenomeGenerateRAM ${task.memory.toBytes() - 100000000}" : ''
+    //def memory      = task.memory ? "--limitGenomeGenerateRAM ${task.memory.toBytes() - 100000000}" : ''
     def include_gtf = gtf ? "--sjdbGTFfile $gtf" : ''
     if (args_list.contains('--genomeSAindexNbases')) {
         """
@@ -29,7 +29,6 @@ container 'biocontainers/mulled-v2-1fa26d1ce03c295fe2fdcf85831a92fbcbd7e8c2:ded3
             --genomeFastaFiles $fasta \\
             $include_gtf \\
             --runThreadN $task.cpus \\
-            $memory \\
             $args
 
         cat <<-END_VERSIONS > versions.yml
@@ -52,7 +51,6 @@ container 'biocontainers/mulled-v2-1fa26d1ce03c295fe2fdcf85831a92fbcbd7e8c2:ded3
             $include_gtf \\
             --runThreadN $task.cpus \\
             --genomeSAindexNbases \$NUM_BASES \\
-            $memory \\
             $args
 
         cat <<-END_VERSIONS > versions.yml
