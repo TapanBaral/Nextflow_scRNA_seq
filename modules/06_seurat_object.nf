@@ -11,7 +11,7 @@ process MTX_TO_SEURAT {
     tuple val(sample_id), path(inputs)
 
     output:
-    path "suerat_object/*.rds", emit: seuratObjects
+    path "seurat_object/*.rds", emit: seuratObjects
     path "versions.yml", emit: versions
 
     when:
