@@ -18,7 +18,6 @@ container 'biocontainers/mulled-v2-1fa26d1ce03c295fe2fdcf85831a92fbcbd7e8c2:ded3
     script:
     def args        = task.ext.args ?: ''
     def args_list   = args.tokenize()
-    //def memory      = task.memory ? "--limitGenomeGenerateRAM ${task.memory.toBytes() - 100000000}" : ''
     def include_gtf = gtf ? "--sjdbGTFfile $gtf" : ''
     if (args_list.contains('--genomeSAindexNbases')) {
         """

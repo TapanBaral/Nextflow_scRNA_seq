@@ -16,6 +16,11 @@ include { MTX_CONVERSION    } from '../subworkflows/06_matrix_to_rds.nf'
 // INPUT FILES SHOULD BE IN 3 COULMNS TAB DELIMITED TEXT FILE WITHOUT A HEADER, EACH LINE CONTAINING THE SAMPLE NAME, ABSOULUTE PATH 
 // TO THE READ1 AND READ2
 
+if (params.help) {
+    log.info params.help_message
+    exit 0
+}
+
 if (params.inputfiles) {
         Channel
             .fromPath(params.inputfiles)
@@ -37,6 +42,9 @@ def gtf_ch                     = params.gtf ? file(params.gtf) : []
 def salmon_index_ch            = params.salmon_index ? file(params.salmon_index) : []
 def star_index_ch              = params.star_index ? file(params.star_index) : []
 ch_versions     = Channel.empty()
+
+
+
 workflow scRNAseq {
 
         //Define the channels to collect outputs  and metadata

@@ -1,7 +1,7 @@
 process MTX_TO_SEURAT {
     tag "$sample_id"
     label 'process_medium'
-
+    publishDir "${params.outdir}/06_matrix_rds_output", mode: "copy"
     conda "r-seurat"
     container "nf-core/seurat:4.3.0"
 
@@ -11,7 +11,7 @@ process MTX_TO_SEURAT {
     tuple val(sample_id), path(inputs)
 
     output:
-    path "${sample_id}/*.rds", emit: seuratObjects
+    path "suerat_object/*.rds", emit: seuratObjects
     path "versions.yml", emit: versions
 
     when:
@@ -29,7 +29,7 @@ process MTX_TO_SEURAT {
         features = "*_Solo.out/Gene*/filtered/features.tsv.gz"
     }
     """
-    mkdir ${sample_id}
+    mkdir suerat_object
     """
 
    
@@ -40,15 +40,9 @@ process MTX_TO_SEURAT {
         $matrix \\
         $barcodes \\
         $features \\
-        ${sample_id}/${sample_id}_matrix.rds \\
+        suerat_object/${sample_id}_matrix.rds \\
         ${aligner}
     """
 
-    stub:
-    """
-    mkdir ${sample_id}
-    touch ${sample_id}/${sample_id}_matrix.rds
-    touch versions.yml
-    """
 }
 
