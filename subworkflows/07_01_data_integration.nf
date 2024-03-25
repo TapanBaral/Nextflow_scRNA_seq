@@ -12,6 +12,5 @@ workflow GETINTEGRATEDRDS {
         rds_objects,
         rmd
     )
-    emit:
-    DATAINTEGRATION
+    
 }
