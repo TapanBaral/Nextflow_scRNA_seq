@@ -11,6 +11,7 @@ workflow SCRNASEQ_ALEVIN {
     take:
     salmon_index
     transcriptome
+    genome
     kmer
     trimmed_read
     txp2gene
