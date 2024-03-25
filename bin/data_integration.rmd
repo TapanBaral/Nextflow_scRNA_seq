@@ -1,0 +1,64 @@
+---
+title: "Seurat Data Integration from .rds Files"
+author: "Tapan Baral"
+date: "Current Date"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+---
+
+# Introduction
+
+This R Markdown document demonstrates how to integrate multiple single-cell RNA-seq datasets stored as .rds files using Seurat.
+
+## Load Required Libraries
+
+```{r load_libraries, echo=FALSE, message=FALSE}
+library(Seurat)
+library(patchwork)
+```
+
+## List .rds files in the directory
+```{r,  echo=FALSE}
+args <- commandArgs(trailingOnly=TRUE)
+input_dir   <- args[1]
+output_dir  <- args[2]
+rds_files <- list.files(input_dir, pattern = "\\.rds$", full.names = TRUE)
+```
+
+
+## Load .rds files into a list
+
+```{r, echo=FALSE}
+rds_objects <- lapply(rds_files, readRDS)
+```
+
+
+## Perform data preprocessing (e.g., normalization, scaling) for each dataset
+
+ rds_objects <- lapply(rds_objects, function(x) {
+    x <- NormalizeData(x)
+    x <- FindVariableFeatures(x, selection.method = "vst", nfeatures = 2000)
+   return(x)
+ })
+
+## Find integration anchors
+```{r, echo=FALSE}
+anchors <- FindIntegrationAnchors(object.list = rds_objects)
+```
+
+##  Integrate datasets
+
+```{r, echo=FALSE}
+integrated_data <- IntegrateData(anchorset = anchors)
+```
+
+```{r, echo=FALSE}
+dir.create(basename(dirname(output_dir)), showWarnings = FALSE)
+
+saveRDS(integrated_data, file = output_dir)
+```
+
+
+

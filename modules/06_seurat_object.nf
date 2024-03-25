@@ -29,7 +29,7 @@ process MTX_TO_SEURAT {
         features = "*_Solo.out/Gene*/filtered/features.tsv.gz"
     }
     """
-    mkdir suerat_object
+    mkdir seurat_object
     """
 
    
@@ -40,7 +40,7 @@ process MTX_TO_SEURAT {
         $matrix \\
         $barcodes \\
         $features \\
-        suerat_object/${sample_id}_matrix.rds \\
+        seurat_object/${sample_id}_matrix.rds \\
         ${aligner}
     """
 
