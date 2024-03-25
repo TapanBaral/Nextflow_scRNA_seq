@@ -1,7 +1,7 @@
 process MTX_TO_SEURAT {
     tag "$sample_id"
     label 'process_medium'
-
+    publishDir "${params.outdir}/06_matrix_rds_output", mode: "copy"
     conda "r-seurat"
     container "nf-core/seurat:4.3.0"
 
