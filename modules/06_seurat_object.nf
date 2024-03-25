@@ -44,11 +44,5 @@ process MTX_TO_SEURAT {
         ${aligner}
     """
 
-    stub:
-    """
-    mkdir suerat_object
-    touch suerat_object/${sample_id}_matrix.rds
-    touch versions.yml
-    """
 }
 
