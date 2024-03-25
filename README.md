@@ -1,6 +1,10 @@
 # WORKFLOW FOR SINGLE CELL RNA-SEQ DATA ANALYSIS
 
-This is a nextflow pipeline for  single cell RNA-seq data analysis. It takes paired end fastq.zg files generated from 10X or smartseq2 platform. STAR or salmon alignment tool can be used to read quantification. The output of the pipeline is a seuratObject rds file, which can be further used for downstream analysis.
+This is a nextflow pipeline for  single cell RNA-seq data analysis. It takes paired end fastq.gz  files generated from 10X or smartseq2 platform. STAR or salmon alignment tool can be used to read quantification. The final output of the pipeline is data integration rds seuratObject output using seurat CCA. The output can futher be used for downstream analysis. 
+
+This pipeline perform following steps,
+ Qluality check using fastqc
+ 
 
 
 ## SET UP NEXTFLOW

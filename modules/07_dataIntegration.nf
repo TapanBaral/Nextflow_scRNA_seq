@@ -1,13 +1,12 @@
 process DATAINTEGRATION {
-
+    tag "$rds_object"
+    label 'process_medium'
     container 'nf-core/seurat:4.3.0'
 
     publishDir "${params.outdir}/07_data_integration", mode: 'copy'
 
     input:
-    val(sample_id), path(input_dir)
-    val(output_dir)
-    path rmd
+    path(rds_object)
 
     output:
     path 'integratedData/report.html',      emit: htmlReport
@@ -16,6 +15,7 @@ process DATAINTEGRATION {
 
     script:
     """
-    my_integration_script.R ${input_dir} ${output_dir}
+    mkdir results
+    data_integration.R ${rds_object} results
     """
 }
