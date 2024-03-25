@@ -1,6 +1,27 @@
 # WORKFLOW FOR SINGLE CELL RNA-SEQ DATA ANALYSIS
 
-This is a nextflow pipeline for  single cell RNA-seq data analysis. It takes paired end fastq.zg files generated from 10X or smartseq2 platform. STAR or salmon alignment tool can be used to read quantification. The output of the pipeline is a seuratObject rds file, which can be further used for downstream analysis.
+Here is a description of the Nextflow pipeline for single-cell RNA-seq data analysis that includes the key features and steps of the pipeline:
+
+This pipeline is designed for analyzing single-cell RNA-seq data from paired-end fastq.gz files generated from 10X or SmartSeq2 platforms. The user can choose between STAR or Salmon alignment tools for read quantification. The final output of the pipeline is a data integration rds Seurat object, which can be used for downstream analysis.
+
+The pipeline consists of the following steps:
+
+1. Quality check: The pipeline performs a quality check of 2.the input files using FastQC.
+2. UMI extraction: The UMIs (unique molecular identifiers) are extracted from the reads using UMI-tools.
+3. Quality filtering: The reads are filtered for bad quality using Fastp.
+4. Post-processing: The filtered reads are processed using FastQC again.
+5. Alignment and quantification: The reads are aligned and quantified using either STAR or Salmon alignment tools.
+6. Data integration: The final output of the pipeline is a data integration rds Seurat object, which is created using Seurat CCA for data integration.
+
+
+ ## Input files 
+   A TAB delimited sample information <a href="https://github.com/TapanBaral/Nextflow_scRNA_seq/blob/main/Assets/sampleInfo.txt"> file </a>.
+   Reference Genome and transcriptome fasta file and gtf file
+   A whitelist <a href="https://kb.10xgenomics.com/hc/en-us/articles/360031133451-Why-is-there-a-discrepancy-in-the-3M-february-2018-txt-barcode-whitelist"> file </a>.
+
+   A Manifest.tsv <a href="https://kb.10xgenomics.com/hc/en-us/articles/360031133451-Why-is-there-a-discrepancy-in-the-3M-february-2018-txt-barcode-whitelist"> file </a> for plate based quantification.  
+
+   Based on the resources number of threads and memmory can be allocated to the pipeline 
 
 
 ## SET UP NEXTFLOW
