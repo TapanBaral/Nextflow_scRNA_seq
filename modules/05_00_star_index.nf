@@ -29,7 +29,6 @@ container 'biocontainers/mulled-v2-1fa26d1ce03c295fe2fdcf85831a92fbcbd7e8c2:ded3
             --genomeFastaFiles $fasta \\
             $include_gtf \\
             --runThreadN $task.cpus \\
-            $memory \\
             $args
 
         cat <<-END_VERSIONS > versions.yml

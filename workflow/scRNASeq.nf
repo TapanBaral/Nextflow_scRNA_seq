@@ -78,7 +78,6 @@ workflow scRNAseq {
 		SCRNASEQ_ALEVIN(
 			salmon_index_ch,
 			transcriptome_ch,
-            genome_fasta_ch,
 			kmer_ch,
 			trimmed_read_ch,
 			txp2gene_ch
