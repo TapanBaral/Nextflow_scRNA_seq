@@ -4,13 +4,11 @@ workflow GETINTEGRATEDRDS {
     take:
 
     rds_objects
-    rmd
 
     main:
     ch_versions = Channel.empty()
     DATAINTEGRATION(
-        rds_objects,
-        rmd
+        rds_objects
     )
     
 }

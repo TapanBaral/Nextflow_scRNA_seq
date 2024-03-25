@@ -11,7 +11,7 @@ include { SCRNASEQ_ALEVIN   } from '../subworkflows/04_00_salmon.nf'
 include { SCRNASEQ_STAR     } from '../subworkflows/05_00_star.nf'
 include { MTX_CONVERSION    } from '../subworkflows/06_matrix_to_rds.nf'
 
-
+include { GETINTEGRATEDRDS  } from '../subworkflows/07_01_data_integration.nf'
 // INPUT FASTQ FILES , PASS IT INTO THE CHANNEL
 // INPUT FILES SHOULD BE IN 3 COULMNS TAB DELIMITED TEXT FILE WITHOUT A HEADER, EACH LINE CONTAINING THE SAMPLE NAME, ABSOULUTE PATH 
 // TO THE READ1 AND READ2
@@ -110,7 +110,10 @@ workflow scRNAseq {
         ch_rds_objects = MTX_CONVERSION.out.seurat_matrix
 
 
-       
+        
+        GETINTEGRATEDRDS{
+            ch_rds_objects
+        }
 
         
 }
