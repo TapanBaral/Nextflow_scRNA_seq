@@ -110,10 +110,9 @@ workflow scRNAseq {
         ch_rds_objects = MTX_CONVERSION.out.seurat_matrix
 
 
-        rmd = file("${baseDir}/bin/data_integration.rmd")
+        
         GETINTEGRATEDRDS{
-            ch_rds_objects,
-            rmd
+            ch_rds_objects
         }
 
         

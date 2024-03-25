@@ -57,7 +57,7 @@ integrated_data <- IntegrateData(anchorset = anchors)
 ```{r, echo=FALSE}
 dir.create(basename(dirname(output_dir)), showWarnings = FALSE)
 
-saveRDS(integrated_data, file = output_dir)
+saveRDS(integrated_data, file = "integratedData.rds")
 ```
 
 
