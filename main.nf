@@ -7,10 +7,6 @@ nextflow.enable.dsl = 2
 include { scRNAseq } from './workflow/scRNASeq.nf'
 
 
-if (params.help) {
-    log.info params.help_message
-    exit 0
-}
 
 workflow scRNASEQ_WF{
 

@@ -37,6 +37,12 @@ def gtf_ch                     = params.gtf ? file(params.gtf) : []
 def salmon_index_ch            = params.salmon_index ? file(params.salmon_index) : []
 def star_index_ch              = params.star_index ? file(params.star_index) : []
 ch_versions     = Channel.empty()
+
+if (params.help) {
+    log.info params.help_message
+    exit 0
+}
+
 workflow scRNAseq {
 
         //Define the channels to collect outputs  and metadata
